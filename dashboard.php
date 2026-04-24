@@ -2,21 +2,21 @@
 
 session_start();
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username'])) { //Check for session
     header("Location: index.php");
     exit();
 }
 
-date_default_timezone_set("Asia/Manila");
+date_default_timezone_set("Asia/Manila"); //Setting timezone(Manila used as reference)
 
-$current_datetime = date("F d, Y - h:i A");
+$current_datetime = date("F d, Y - h:i A"); // Setting the date with the format: Month Day, Year - Hour:Minute AM/PM
 
-$last_visit = "First time login";
-if (isset($_COOKIE['last_visit'])) {
+$last_visit = "First time login";  
+if (isset($_COOKIE['last_visit'])) { //check for previous visits
     $last_visit = $_COOKIE['last_visit'];
 }
 
-setcookie("last_visit", $current_datetime, time() + 86400, "/");
+setcookie("last_visit", $current_datetime, time() + 86400, "/"); // store a visit in a cookie, expires in 24hrs
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ setcookie("last_visit", $current_datetime, time() + 86400, "/");
         }
         .logout-btn:hover {
             background-color: #a00c07;
-        }
+        } 
     </style>
 </head>
 <body>
