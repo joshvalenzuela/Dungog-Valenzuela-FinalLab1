@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Default user "admin" with password "admin"
     if ($username === 'admin' && $password === 'admin') {
-        $_SESSION['user'] = $username;
+        $_SESSION['user'] = $username; // keep 'user'
         header("Location: dashboard.php");
         exit();
     } else {

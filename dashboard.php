@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['username'])) { //Check for session
+if (!isset($_SESSION['user'])) { //Check for session
     header("Location: index.php");
     exit();
 }
@@ -43,7 +43,7 @@ setcookie("last_visit", $current_datetime, time() + 86400, "/"); // store a visi
     </style>
 </head>
 <body>
-    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h2>
     <p>Today is: <?php echo $current_datetime; ?></p>
     <p>Your last visit was: <?php echo $last_visit; ?></p>
 
