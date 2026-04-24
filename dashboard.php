@@ -1,53 +1,56 @@
 <?php
+
 session_start();
 
-// Check if user is logged in
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
+
+date_default_timezone_set("Asia/Manila");
+
+$current_datetime = date("F d, Y - h:i A");
+
+$last_visit = "First time login";
+if (isset($_COOKIE['last_visit'])) {
+    $last_visit = $_COOKIE['last_visit'];
+}
+
+setcookie("last_visit", $current_datetime, time() + 86400, "/");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 40px;
         }
-        .dashboard-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+        .logout-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ff2720;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
         }
-        .dashboard-content {
-            background: white;
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .dashboard-content h1 {
-            color: #333;
-            margin-bottom: 30px;
+        .logout-btn:hover {
+            background-color: #a00c07;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="dashboard-content">
-            <h1>Hello World!</h1>
-            <p class="lead text-muted">Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</p>
-            
-            <a href="logout.php" class="btn btn-danger mt-4">Logout</a>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+    <p>Today is: <?php echo $current_datetime; ?></p>
+    <p>Your last visit was: <?php echo $last_visit; ?></p>
+
+    <a href="logout.php" class="logout-btn">Logout</a>
+
+    <hr>
+    <h3>Hands-On Activity: Daily Check-In Tracker</h3>
+    <p><strong>KISH:</strong> Kirk + Josh .</p>
 </body>
 </html>
